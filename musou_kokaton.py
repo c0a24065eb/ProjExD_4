@@ -408,13 +408,17 @@ def main():
                     score.value -= 200
                     gravity = Gravity(400)
                     grav.add(gravity)
-                    
+            if event.type == pg.KEYDOWN and event.key == pg.K_RSHIFT:
+                if score.value >= 100 and bird.state == "normal":
+                    bird.state = "hyper"
+                    bird.hyper_life = 500
+                    score.value -= 100
 
             key_lst = pg.key.get_pressed()
             if key_lst[pg.K_LSHIFT] and key_lst[pg.K_SPACE]:
                 neo_beam = NeoBeam(bird, 5)
                 beams.add(neo_beam.gen_beams())
-            if event.key == pg.K_e and score.value >= 20:
+            if event.type == pg.KEYDOWN and event.key == pg.K_e and score.value >= 20:
                 score.value -= 20
                 EMP(emys,bombs,screen)
             if event.type == pg.KEYDOWN and event.key == pg.K_s:
